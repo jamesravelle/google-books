@@ -62,24 +62,21 @@ function Books() {
     let newArray = [];
     API.getGoogleBooks(book, author)
     .then(res => { 
-      // Does not work
-      // setGoogleBooks(res.data.items);
-      // console.log(googleBooks);
+      // console.log(res.data.items);
+      // console.log(res.data.items.length);
+
       for(let i = 0; i < res.data.items.length; i++){
         let newObject = {};  
           newObject.title = res.data.items[i].volumeInfo.title;
           newObject.author = res.data.items[i].volumeInfo.authors[0];
           newObject.synopsis = res.data.items[i].volumeInfo.description;
           newArray.push(newObject)
-          // Does not work
-          // setGoogleBooks([newArray]);
-          // console.log(googleBooks);
-          
       }
+      setGoogleBooks(newArray);
+      console.log(googleBooks);
     })
     .catch(err => console.log(err));
-    // console.log(newArray)
-    setGoogleBooks(newArray);
+    
   }
 
   const addBook = (event) => {

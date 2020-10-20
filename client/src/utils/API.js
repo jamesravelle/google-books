@@ -24,6 +24,6 @@ export default {
     const URLbook = book.split(" ").join("&") + "xxx" + author.split(" ").join("&");
     // https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=yourAPIKey
     // https://www.googleapis.com/books/v1/volumes?q=${query}&key=${APIkey}
-    return axios.get("/api/googlebooks/" + URLbook)
+    return axios.get("/api/books/googlebooks/" + URLbook)
   }
 };
