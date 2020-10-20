@@ -41,19 +41,10 @@ function Books() {
     console.log(formObject)
   }
 
-  function handleFormSubmit(event) {
+  function SearchForBooks(event) {
     event.preventDefault();
     getGoogleBooks(formObject.title, formObject.author);
-    API.saveBook(formObject)
-    .then(() => setFormObject({
-      title: "",
-      author: "",
-      synopsis: ""
-    }))
-    .then(() => 
-      loadBooks()
-    )
-    .catch(err => console.log(err));
+    
   }
 
   function deleteBook(id) {
@@ -91,10 +82,27 @@ function Books() {
     setGoogleBooks(newArray);
   }
 
-  useEffect(() => {
-    console.log(googleBooks);
-  }, [googleBooks])
+  const addBook = (event) => {
+    // Pass these attributes back into the parent and add to database
+    console.log(event.target.getAttribute("data-title"))
+    console.log(event.target.getAttribute("data-author"))
+    console.log(event.target.getAttribute("data-synopsis"))
+    const bookObject = {
+      title: event.target.getAttribute("data-title"),
+      author: event.target.getAttribute("data-author"),
+      synopsis: event.target.getAttribute("data-synopsis")
+    }
+    API.saveBook(bookObject)
+    .then(()=>{
+      setGoogleBooks([])
+    })
+    .then(() => 
+      loadBooks()
+    )
+    .catch(err => console.log(err));
+}
 
+console.log(googleBooks.length);
     return (
       <Container fluid>
         <Row>
@@ -121,18 +129,18 @@ function Books() {
               /> */}
               <FormBtn
                 disabled={!(formObject.author && formObject.title)}
-                onClick={handleFormSubmit}
+                onClick={SearchForBooks}
               >
-                Submit Book
+                Search
               </FormBtn>
             </form>
           </Col>
           <Col size="12">
-              <h1>Search Results:</h1>
+              {googleBooks.length <= 0 ? <div></div> : <h1>Search Results:</h1>}
               <hr/>
               {googleBooks.map((x)=>{
                 console.log(x);
-                return <SearchResult value={x} />
+                return <SearchResult value={x} addBook={addBook}/>
               })}
           </Col>
           <Col size="12">

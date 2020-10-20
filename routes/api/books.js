@@ -13,4 +13,9 @@ router
   .put(booksController.update)
   .delete(booksController.remove);
 
+// Matches with "/api/books/googlebooks/:id"
+router
+  .route("/googlebooks/:id")
+  .get(booksController.getGoogleBooks)
+
 module.exports = router;

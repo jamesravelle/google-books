@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const APIkey = process.env;
+// const APIkey = process.env.REACT_APP_GOOGLE_API_KEY;
+
 
 export default {
   // Gets all books
@@ -20,11 +21,9 @@ export default {
     return axios.post("/api/books", bookData);
   },
   getGoogleBooks: function(book, author) {
-    console.log(APIkey)
-    const URLbook = book.split(" ").join("&");
-    const URLauthor = author.split(" ").join("&");
+    const URLbook = book.split(" ").join("&") + "xxx" + author.split(" ").join("&");
     // https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=yourAPIKey
     // https://www.googleapis.com/books/v1/volumes?q=${query}&key=${APIkey}
-    return axios.get(`https://www.googleapis.com/books/v1/volumes?q=${URLbook}+inauthor:${URLauthor}&key=${APIkey}&maxResults=10`)
+    return axios.get("/api/googlebooks/" + URLbook)
   }
 };

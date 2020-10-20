@@ -1,4 +1,7 @@
 const db = require("../models");
+import axios from "axios";
+
+const APIkey = process.env.GOOGLE_API_KEY;
 
 // Defining methods for the booksController
 module.exports = {
@@ -33,5 +36,15 @@ module.exports = {
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
+  },
+  getGoogleBooks: function(req,res){
+    const query = req.params.id
+    console.log(query);
+    const modQuery = query.split("xxx");
+    axios.get(`https://www.googleapis.com/books/v1/volumes?q=${modQuery[0]}+inauthor:${modQuery[1]}&key=${APIkey}`)
+    .then(res => {
+      console.log(res)
+      res.json(res)
+    })
   }
 };
