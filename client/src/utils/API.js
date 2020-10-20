@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const APIkey = "AIzaSyCmAPVY9KRO1YkfPimcIZUolkMEhp7HfME";
+const APIkey = process.env;
 
 export default {
   // Gets all books
@@ -20,6 +20,7 @@ export default {
     return axios.post("/api/books", bookData);
   },
   getGoogleBooks: function(book, author) {
+    console.log(APIkey)
     const URLbook = book.split(" ").join("&");
     const URLauthor = author.split(" ").join("&");
     // https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=yourAPIKey
