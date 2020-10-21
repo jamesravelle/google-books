@@ -8,6 +8,8 @@ import { Input, TextArea, FormBtn } from "../components/Form";
 
 import SearchResult from "../components/SearchResult/SearchResult"
 
+import MyBooks from "../pages/MyBooks"
+
 function Books() {
   // Setting our component's initial state
   const [books, setBooks] = useState([])
@@ -99,7 +101,6 @@ function Books() {
     .catch(err => console.log(err));
 }
 
-console.log(googleBooks.length);
     return (
       <Container fluid>
         <Row>
@@ -119,11 +120,6 @@ console.log(googleBooks.length);
                 name="author"
                 placeholder="Author (required)"
               />
-              {/* <TextArea
-                onChange={handleInputChange}
-                name="synopsis"
-                placeholder="Synopsis (Optional)"
-              /> */}
               <FormBtn
                 disabled={!(formObject.author && formObject.title)}
                 onClick={SearchForBooks}
@@ -164,6 +160,7 @@ console.log(googleBooks.length);
             )}
           </Col>
         </Row>
+        <MyBooks />
       </Container>
     );
   }
