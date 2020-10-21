@@ -8,7 +8,7 @@ import { Input, TextArea, FormBtn } from "../components/Form";
 
 import SearchResult from "../components/SearchResult/SearchResult"
 
-import MyBooks from "../pages/MyBooks"
+
 
 function Books() {
   // Setting our component's initial state
@@ -83,9 +83,6 @@ function Books() {
 
   const addBook = (event) => {
     // Pass these attributes back into the parent and add to database
-    console.log(event.target.getAttribute("data-title"))
-    console.log(event.target.getAttribute("data-author"))
-    console.log(event.target.getAttribute("data-synopsis"))
     const bookObject = {
       title: event.target.getAttribute("data-title"),
       author: event.target.getAttribute("data-author"),
@@ -96,7 +93,8 @@ function Books() {
       setGoogleBooks([])
     })
     .then(() => 
-      loadBooks()
+      // loadBooks()
+      window.location.href = "/mybooks"
     )
     .catch(err => console.log(err));
 }
@@ -136,31 +134,7 @@ function Books() {
                 return <SearchResult value={x} addBook={addBook}/>
               })}
           </Col>
-          <Col size="12">
-            <Jumbotron>
-              <h1>Books On My List</h1>
-            </Jumbotron>
-            {books.length ? (
-              <List>
-                {books.map(book => {
-                  return (
-                    <ListItem key={book._id}>
-                      <a href={"/books/" + book._id}>
-                        <strong>
-                          {book.title} by {book.author}
-                        </strong>
-                      </a>
-                      <DeleteBtn onClick={() => deleteBook(book._id)} />
-                    </ListItem>
-                  );
-                })}
-              </List>
-            ) : (
-              <h3>No Results to Display</h3>
-            )}
-          </Col>
         </Row>
-        <MyBooks />
       </Container>
     );
   }

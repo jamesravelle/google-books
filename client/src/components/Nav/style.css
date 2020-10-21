@@ -1,0 +1,10 @@
+.menu-link{
+    color:white;
+    margin:0 20px;
+}
+
+.menu-link:hover{
+    color:white;
+    font-weight:bold;
+    text-decoration:none;
+}
