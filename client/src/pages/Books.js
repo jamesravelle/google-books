@@ -100,12 +100,15 @@ function Books() {
 }
 
     return (
-      <Container fluid>
-        <Row>
-          <Col size="12">
-            <Jumbotron>
+      <div>
+      <Jumbotron>
               <h1>What Books Should I Read?</h1>
             </Jumbotron>
+      <Container>
+        
+        <Row>
+          <Col size="12">
+            <h2>Search For A Book:</h2><br/>
             <form>
               {/* inputs should be updated to be controlled inputs */}
               <Input
@@ -128,7 +131,8 @@ function Books() {
           </Col>
           <Col size="12">
               {googleBooks.length <= 0 ? <div></div> : <h1>Search Results:</h1>}
-              <hr/>
+              {googleBooks.length <= 0 ? <div></div> : <hr/>}
+              
               {googleBooks.map((x)=>{
                 console.log(x);
                 return <SearchResult value={x} addBook={addBook}/>
@@ -136,6 +140,7 @@ function Books() {
           </Col>
         </Row>
       </Container>
+      </div>
     );
   }
 

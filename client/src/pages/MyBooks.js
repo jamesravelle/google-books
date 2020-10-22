@@ -38,18 +38,21 @@ function Books() {
   } 
 
     return (
+      <div>
+      <Jumbotron>
+         <h1>Books On My List</h1>
+      </Jumbotron>
       <Container fluid>
         <Row>
           <Col size="12">
-            <Jumbotron>
-              <h1>Books On My List</h1>
-            </Jumbotron>
+            
             {books.length ? (
               <List>
                 {books.map(book => {
                   return (
                     <ListItem key={book._id}>
                       <a href={"/books/" + book._id}>
+                      <i class="fa fa-book" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;
                         <strong>
                           {book.title} by {book.author}
                         </strong>
@@ -65,6 +68,7 @@ function Books() {
           </Col>
         </Row>
       </Container>
+      </div>
     );
   }
 

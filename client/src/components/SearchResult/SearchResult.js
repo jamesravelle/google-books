@@ -7,7 +7,7 @@ function SearchResult(props) {
                 <h3>{props.value.title}</h3>
                 <p>By: {props.value.author}</p>
                 <p>{props.value.synopsis}</p>
-                <button onClick={props.addBook} data-title={props.value.title} data-author={props.value.author} data-synopsis={props.value.synopsis}>Add Book</button>
+                <button className="btn-primary" onClick={props.addBook} data-title={props.value.title} data-author={props.value.author} data-synopsis={props.value.synopsis}>Add Book</button>
               </div>
             )
           
